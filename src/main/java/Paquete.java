@@ -1,10 +1,12 @@
 /**
  * Un bulto físico que forma parte de un envío.
  *
- * @author
+ * @Iván Álvarez Martínez
  */
 public class Paquete {
-
+    private Dimension dimension;
+    private double peso;
+    private double pesoVolumetrico;
     /** cm3 que equivalen a 1 kg a efectos de facturación */
     public static final double FACTOR_VOLUMETRICO = 5000;
 
@@ -14,7 +16,8 @@ public class Paquete {
      * Crea un paquete a partir de una dimensión ya creada y su peso real (kg).
      */
     public Paquete(Dimension dimension, double peso) {
-        // TODO
+        this.dimension = dimension;
+        this.peso = peso;
     }
 
     /**
@@ -22,36 +25,34 @@ public class Paquete {
      * Sin duplicar el código del otro constructor.
      */
     public Paquete(double alto, double ancho, double largo, double peso) {
-        // TODO
+        this(new Dimension(alto, ancho, largo), peso);
     }
 
     public Dimension getDimension() {
-        // TODO
-        return null;
+        return dimension;
     }
 
     /**
      * @return el peso real en kg
      */
     public double getPeso() {
-        // TODO
-        return 0;
+        return peso;
     }
 
     /**
      * @return el volumen del paquete en cm3
      */
     public double calcularVolumen() {
-        // TODO (lee la decisión de diseño del enunciado)
-        return 0;
+        dimension.calcularVolumen();
+        return dimension.calcularVolumen();
     }
 
     /**
      * @return el peso volumétrico en kg (volumen / FACTOR_VOLUMETRICO)
      */
     public double calcularPesoVolumetrico() {
-        // TODO
-        return 0;
+        pesoVolumetrico = dimension.calcularVolumen() / FACTOR_VOLUMETRICO;
+        return pesoVolumetrico;
     }
 
     /**
@@ -60,8 +61,8 @@ public class Paquete {
      * @return el peso facturable en kg
      */
     public double calcularPesoFacturable() {
-        // TODO
-        return 0;
+        Math.max(peso, pesoVolumetrico);
+        return Math.max(peso, pesoVolumetrico);
     }
 
     /**
