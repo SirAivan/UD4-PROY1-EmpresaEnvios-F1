@@ -2,7 +2,7 @@
  * Medidas exteriores de un paquete, en centímetros.
  * No tiene métodos para modificar las medidas: una vez creada no cambia.
  *
- * @author
+ * @Iván Álvarez Martínez
  */
 public class Dimension {
 
@@ -33,7 +33,12 @@ public class Dimension {
 
     // DECISIÓN DE DISEÑO (ver enunciado): si decides que el volumen lo
     // calcula Dimension, añade aquí el método.
+    // El volumen lo calcula Dimensión porque al ser una clase independiente en el caso de
+    // necesitarla no haría falta repetir el código.
 
+    public double calcularVolumen(){
+        return alto * ancho * largo;
+    }
     /**
      * @return las medidas con el formato "40.0 x 30.0 x 50.0 cm"
      */
