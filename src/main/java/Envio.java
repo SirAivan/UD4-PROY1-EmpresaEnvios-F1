@@ -74,7 +74,6 @@ public class Envio {
      * @return true si se ha añadido, false si el envío estaba completo
      */
     public boolean addPaquete(Paquete paquete) {
-        boolean anadido = false;
         if (!estaCompleto()) {
             if (paquete1 == null) {
                 paquete1 = paquete;
@@ -83,9 +82,10 @@ public class Envio {
             } else if (paquete3 == null){
                 paquete3 = paquete;
                 }
+            return true;
+        } else{
+            return false;
         }
-        anadido = true;
-        return anadido;
     }
 
     /**
@@ -94,7 +94,7 @@ public class Envio {
      * @return true si se ha añadido, false si el envío estaba completo
      */
     public boolean addPaquete(double alto, double ancho, double largo, double peso){
-        if (addPaquete() == true){
+        if ( addPaquete() == true){
             new Paquete(alto, ancho, largo, peso);
             return true;
         }
@@ -125,10 +125,15 @@ public class Envio {
      * antes; null si el envío no tiene paquetes
      */
     public Paquete getPaqueteMasPesado() {
-        if (paquete1.getPeso() > paquete2.getPeso ){
-
+        if (paquete1.getPeso() >= paquete2.getPeso() && paquete1.getPeso() >= paquete3.getPeso()) {
+            return paquete1;
+        } else if (paquete2.getPeso() > paquete1.getPeso() && paquete2.getPeso() >= paquete3.getPeso()) {
+            return paquete2;
+        } else if (paquete3.getPeso() > paquete1.getPeso() && paquete3.getPeso() > paquete2.getPeso()) {
+            return paquete3;
+        } else {
+            return null;
         }
-        return null;
     }
 
     /**
