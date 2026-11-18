@@ -61,7 +61,6 @@ public class Paquete {
      * @return el peso facturable en kg
      */
     public double calcularPesoFacturable() {
-        Math.max(peso, pesoVolumetrico);
         return Math.max(peso, pesoVolumetrico);
     }
 
@@ -69,7 +68,6 @@ public class Paquete {
      * @return por ejemplo "40.0 x 30.0 x 50.0 cm | 8.0 kg (facturable 12.0 kg)"
      */
     public String toString() {
-        // TODO
-        return "";
+        return dimension.toString() + "|" + peso + "kg" + "(facturable" + calcularPesoVolumetrico() + "kg)";
     }
 }
