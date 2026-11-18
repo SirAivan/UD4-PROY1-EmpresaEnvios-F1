@@ -44,15 +44,23 @@ public class Envio {
      */
     public int getNumeroPaquetes() {
         // TODO (se calcula comprobando qué atributos d paquete son null)
+        int paquetes = 0;
+        if (paquete1 == null) {
+            paquetes = 2;
+            }else if (paquete2 == null) {
+                paquetes = 1;
+                }else if (paquete3 == null){
+                    paquetes = 0;
+                }
 
-        return 0;
+        return paquetes;
     }
 
     /**
      * @return true si ya no se pueden añadir más paquetes
      */
     public boolean estaCompleto() {
-        if (MAX_PAQUETES == 3){
+        if (getNumeroPaquetes() == MAX_PAQUETES){
             return true;
         }
         else{
@@ -66,8 +74,28 @@ public class Envio {
      * @return true si se ha añadido, false si el envío estaba completo
      */
     public boolean addPaquete(Paquete paquete) {
+        boolean anadido = false;
         if (!estaCompleto()) {
-            Paquete++;
+            if (paquete1 == null) {
+                paquete1 = paquete;
+            } else if (paquete2 == null) {
+                paquete2 = paquete;
+            } else if (paquete3 == null){
+                paquete3 = paquete;
+                }
+        }
+        anadido = true;
+        return anadido;
+    }
+
+    /**
+     * Crea un paquete con las medidas y peso indicados y lo añade al envío.
+     *
+     * @return true si se ha añadido, false si el envío estaba completo
+     */
+    public boolean addPaquete(double alto, double ancho, double largo, double peso){
+        if (addPaquete() == true){
+            new Paquete(alto, ancho, largo, peso);
             return true;
         }
         else {
@@ -76,20 +104,10 @@ public class Envio {
     }
 
     /**
-     * Crea un paquete con las medidas y peso indicados y lo añade al envío.
-     *
-     * @return true si se ha añadido, false si el envío estaba completo
-     */
-    public boolean addPaquete(double alto, double ancho, double largo, double peso) {
-        return false;
-    }
-
-    /**
      * @return la suma de los pesos reales de los paquetes (kg)
      */
     public double calcularPesoReal() {
-        // TODO
-        return 0;
+        return paquete1.getPeso() + paquete2.getPeso() + paquete3.getPeso();
     }
 
     /**
@@ -99,8 +117,7 @@ public class Envio {
      * @return el peso facturable del envío (kg enteros)
      */
     public double calcularPesoFacturable() {
-        // TODO
-        return 0;
+        return Math.ceil(paquete1.calcularPesoFacturable() + paquete2.calcularPesoFacturable() + paquete3.calcularPesoFacturable());
     }
 
     /**
@@ -108,7 +125,9 @@ public class Envio {
      * antes; null si el envío no tiene paquetes
      */
     public Paquete getPaqueteMasPesado() {
-        // TODO
+        if (paquete1.getPeso() > paquete2.getPeso ){
+
+        }
         return null;
     }
 
@@ -116,7 +135,10 @@ public class Envio {
      * @return representación textual del envío (ver enunciado)
      */
     public String toString() {
-        // TODO
-        return "";
+        return "Envío" + codigo + "-> CP" + codigoPostal + "(" + getNumeroPaquetes() + "paquete/s)" +
+        "1." + paquete1.toString() +
+        "2." + paquete2.toString() +
+        "3." + paquete3.toString() +
+        "Peso real:" + calcularPesoReal() + "kg | Peso facturable:" + calcularPesoFacturable() + "kg";
     }
 }
