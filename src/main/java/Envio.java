@@ -9,8 +9,15 @@
 public class Envio {
 
     // TODO constante de clase MAX_PAQUETES (ver enunciado)
+    // private es la visibilidad más restrictiva posible en este caso, ya que las opciones son o public o private.
+    private static final int MAX_PAQUETES = 3;
 
     // TODO atributos: código de seguimiento, código postal y tres paquetes
+    public String codigo;
+    public String codigoPostal;
+    public Paquete paquete1;
+    public Paquete paquete2;
+    public Paquete paquete3;
 
     /**
      * Crea un envío sin paquetes.
@@ -18,18 +25,17 @@ public class Envio {
      * @param codigo       código de seguimiento, p.ej. "PX00000001R"
      * @param codigoPostal código postal del destino, p.ej. "36202"
      */
-    public Envio(String codigo, String codigoPostal) {
-        // TODO
+    public Envio(String codigo, String codigoPostal){
+        this.codigo = codigo;
+        this.codigoPostal = codigoPostal;
     }
 
     public String getCodigo() {
-        // TODO
-        return null;
+        return codigo;
     }
 
     public String getCodigoPostal() {
-        // TODO
-        return null;
+        return codigoPostal;
     }
 
     /**
@@ -38,6 +44,7 @@ public class Envio {
      */
     public int getNumeroPaquetes() {
         // TODO (se calcula comprobando qué atributos d paquete son null)
+
         return 0;
     }
 
@@ -45,8 +52,12 @@ public class Envio {
      * @return true si ya no se pueden añadir más paquetes
      */
     public boolean estaCompleto() {
-        // TODO
-        return false;
+        if (MAX_PAQUETES == 3){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /**
@@ -55,8 +66,13 @@ public class Envio {
      * @return true si se ha añadido, false si el envío estaba completo
      */
     public boolean addPaquete(Paquete paquete) {
-        // TODO
-        return false;
+        if (!estaCompleto()) {
+            Paquete++;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -65,7 +81,6 @@ public class Envio {
      * @return true si se ha añadido, false si el envío estaba completo
      */
     public boolean addPaquete(double alto, double ancho, double largo, double peso) {
-        // TODO
         return false;
     }
 
