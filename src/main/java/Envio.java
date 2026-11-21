@@ -45,13 +45,15 @@ public class Envio {
     public int getNumeroPaquetes() {
         // TODO (se calcula comprobando qué atributos d paquete son null)
         if (paquete1 == null) {
-            return 2;
+            return 0;
         }else if (paquete2 == null) {
             return 1;
         }else if (paquete3 == null){
-            return 0;
+            return 2;
         }
-        return 0;
+        else {
+            return 3;
+        }
     }
 
     /**
@@ -106,7 +108,12 @@ public class Envio {
      * @return la suma de los pesos reales de los paquetes (kg)
      */
     public double calcularPesoReal() {
-        return paquete1.getPeso() + paquete2.getPeso();
+        if (paquete3 != null){
+        return paquete1.getPeso() + paquete2.getPeso() + paquete3.getPeso();
+        }
+        else {
+            return paquete1.getPeso() + paquete2.getPeso();
+        }
     }
 
     /**
@@ -116,7 +123,11 @@ public class Envio {
      * @return el peso facturable del envío (kg enteros)
      */
     public double calcularPesoFacturable() {
-        return Math.ceil(paquete1.calcularPesoFacturable() + paquete2.calcularPesoFacturable());
+        if (paquete3 != null){
+            return Math.ceil(paquete1.calcularPesoFacturable() + paquete2.calcularPesoFacturable() + paquete3.calcularPesoFacturable());
+        } else {
+            return Math.ceil(paquete1.calcularPesoFacturable() + paquete2.calcularPesoFacturable());
+        }
     }
 
     /**
@@ -139,9 +150,17 @@ public class Envio {
      * @return representación textual del envío (ver enunciado)
      */
     public String toString() {
-        return "Envío" + codigo + "-> CP" + codigoPostal + "(" + getNumeroPaquetes() + "paquete/s)" +
-        "1." + paquete1.toString() +
-        "2." + paquete2.toString() +
-        "Peso real:" + calcularPesoReal() + "kg | Peso facturable: " + calcularPesoFacturable() + " kg";
+        if (paquete3 != null){
+            return "Envío" + codigo + "-> CP" + codigoPostal + "(" + getNumeroPaquetes() + "paquete/s)" +
+                    "\n1. " + paquete1.toString() +
+                    "\n2. " + paquete2.toString() +
+                    "\n3. " + paquete3.toString() +
+                    "\nPeso real:" + calcularPesoReal() + "kg | Peso facturable: " + calcularPesoFacturable() + " kg";
+        } else {
+            return "Envío" + codigo + "-> CP" + codigoPostal + "(" + getNumeroPaquetes() + "paquete/s)" +
+                    "\n1. " + paquete1.toString() +
+                    "\n2. " + paquete2.toString() +
+                    "\nPeso real:" + calcularPesoReal() + "kg | Peso facturable: " + calcularPesoFacturable() + " kg";
+        }
     }
 }
